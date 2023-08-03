@@ -7,18 +7,18 @@
 }
 
 .grid-item {
-    width: 60px;
-    height: 60px;
+    width: 100px;
+    height: 100px;
     border: 1px solid black;
+    position: relative;
 }
 
-.good {
-    background-color: green;
+.grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
-.bad {
-    background-color: red;
-}
 
 #wrapper{
     width: 100%;
@@ -30,4 +30,21 @@
     display: block;
     margin: auto;
 }
+
+.good {
+    background-color: rgba(0, 255, 0, 0.5);
+}
+
+.bad {
+    background-color: rgba(255, 0, 0, 0.5);
+}
+
+.good, .bad {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
 

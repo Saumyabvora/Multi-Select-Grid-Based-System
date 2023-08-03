@@ -7,6 +7,8 @@ window.oncontextmenu = function(event) {
 let counts = {};
 let selections = {};
 
+let images = ['images/1.jpg', 'https://i.stack.imgur.com/SBv4T.gif', 'images/3.jpg', 'images/4.jpg', 'images/5.jpg', 'images/6.jpg', 'images/7.jpg', 'images/8.jpg', 'images/9.jpg',];
+
 function createGrids() {
     let numGrids = document.getElementById('grid-select').value;
     let container = document.getElementById('grid-container');
@@ -25,6 +27,10 @@ function createGrids() {
             item.className = 'grid-item';
             item.id = 'grid-' + i + '-item-' + j;
 
+            let img = document.createElement('img');
+            img.src = images[j];
+            item.appendChild(img);
+
             item.onmousedown = function(event) { clickItem(item, i, event); };
             grid.appendChild(item);
         }
@@ -33,32 +39,44 @@ function createGrids() {
     }
 }
 
+
+
 function clickItem(item, gridNum, event) {
+    let type;
+    let img = item.querySelector('img'); // get the img element inside the grid item
     // Right click (button code 2)
     if(event.button === 2) {
-        if(item.classList.contains('bad')) {
-            item.classList.remove('bad');
+        if(img.classList.contains('bad')) {
+            img.classList.remove('bad');
             counts[gridNum].bad--;
             selections[gridNum][item.id] = undefined;
         } else if(counts[gridNum].bad < 1) {
-            item.classList.add('bad');
+            img.classList.add('bad');
             counts[gridNum].bad++;
-            selections[gridNum][item.id] = 'bad';
+            type = 'bad';
         }
     } 
     // Left click (button code 0)
     else if(event.button === 0) {
-        if(item.classList.contains('good')) {
-            item.classList.remove('good');
+        if(img.classList.contains('good')) {
+            img.classList.remove('good');
             counts[gridNum].good--;
             selections[gridNum][item.id] = undefined;
         } else if(counts[gridNum].good < 3) {
-            item.classList.add('good');
+            img.classList.add('good');
             counts[gridNum].good++;
-            selections[gridNum][item.id] = 'good';
+            type = 'good';
         }
     }
+
+    if (type) {
+        // Remove other class if present
+        img.classList.remove(type === 'good' ? 'bad' : 'good');
+        selections[gridNum][item.id] = type;
+    }
 }
+
+
 
 function storeData() {
     Object.keys(selections).forEach(gridNum => {
