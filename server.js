@@ -14,22 +14,22 @@ let db = new sqlite3.Database('./gridData.db', (err) => {
     console.log('Connected to the SQLite database.');
 });
 
-db.run(`CREATE TABLE IF NOT EXISTS grid (id TEXT, type TEXT, value TEXT)`, (err) => {
-    if (err) {
-        console.error(err.message);
-    }
+app.post('/update-grid', async (req, res) => {
+    const { title, gridId, itemId, type } = req.body;
+
+    const db = new sqlite3.Database('./gridData.db');
+    db.run(`CREATE TABLE IF NOT EXISTS gridData (title TEXT, gridId TEXT, itemId TEXT, type TEXT)`);
+    
+    let stmt = db.prepare(`INSERT INTO gridData VALUES (?, ?, ?, ?)`);
+    stmt.run(title, gridId, itemId, type);
+    stmt.finalize();
+    
+    db.close();
+    
+    res.sendStatus(200);
 });
 
-app.post('/update-grid', function(req, res) {
-    db.run(`INSERT OR REPLACE INTO grid(id, type, value) VALUES(?, ?, ?)`, [req.body.id, req.body.type, req.body.value], function(err) {
-        if (err) {
-            return console.log(err.message);
-        }
-        console.log(`A row has been inserted with rowid ${this.lastID}`);
-    });
 
-    res.send('Grid Updated');
-});
 
 app.listen(3000, function() {
     console.log('App listening on port 3000');

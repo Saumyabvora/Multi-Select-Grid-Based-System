@@ -85,33 +85,34 @@ function clickItem(item, gridNum, event) {
 
 
 function storeData() {
+    let uniqueTitle = "StoreOp" + Date.now();
     Object.keys(selections).forEach(gridNum => {
         Object.keys(selections[gridNum]).forEach(itemId => {
             let type = selections[gridNum][itemId];
             if(type) {
                 // Store both grid ID and type in the database
-                updateGrid(gridNum, itemId, type, '1');
+                updateGrid(uniqueTitle, gridNum, itemId, type, '1');
             }
         });
     });
 }
 
+
 // ...updateGrid function as before...
 
 
 
-
-
-function updateGrid(id, type, value) {
+function updateGrid(title, gridNum, itemId, type) {
     fetch('http://localhost:3000/update-grid', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            id: id,
-            type: type,
-            value: value,
+            title: title,
+            gridId: gridNum,
+            itemId: itemId,
+            type: type
         }),
     })
     .then(response => response.json())
@@ -122,3 +123,4 @@ function updateGrid(id, type, value) {
         console.error('Error:', error);
     });
 }
+
