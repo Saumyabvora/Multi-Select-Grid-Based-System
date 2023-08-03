@@ -4,16 +4,20 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <div id="wrapper"><img id="logo" src ="images/logo.png"></div>
-    <select id="grid-select" onchange="createGrids()">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-    </select>
-
-    <button id="store-button" onclick="storeData()">Store</button>
+    <div id="wrapper">
+        <img id="logo" src ="images/logo.png">
+        <div id="buttons">
+            <select id="grid-select" onchange="createGrids()">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        
+            <button id="store-button" onclick="storeData()">Store</button>
+        </div>
+    </div>
     
 
     <div id="grid-container">

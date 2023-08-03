@@ -7,7 +7,13 @@ window.oncontextmenu = function(event) {
 let counts = {};
 let selections = {};
 
-let images = ['images/1.jpg', 'https://i.stack.imgur.com/SBv4T.gif', 'images/3.jpg', 'images/4.jpg', 'images/5.jpg', 'images/6.jpg', 'images/7.jpg', 'images/8.jpg', 'images/9.jpg',];
+let images = ['https://media.giphy.com/media/fSHgyXYXy8Sd2/giphy.gif', 'https://i.stack.imgur.com/SBv4T.gif', 'https://media.giphy.com/media/wyoUdfhunrDZ6/giphy.gif', 
+'https://media.giphy.com/media/14uXQbPS73Y3qU/giphy.gif', 
+'https://media.giphy.com/media/SzLfW8ydkkjde/giphy.gif', 
+'https://media.giphy.com/media/ruhPcuDNmS12M/giphy.gif', 
+'https://media.giphy.com/media/BjKPq7zcAiNgf0zfXc/giphy.gif', 
+'https://media.giphy.com/media/33zX3zllJBGY8/giphy.gif', 
+'images/9.jpg',];
 
 function createGrids() {
     let numGrids = document.getElementById('grid-select').value;
